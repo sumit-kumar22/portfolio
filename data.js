@@ -56,8 +56,43 @@ const portfolioData = {
       items: ["Microsoft Excel", "Power BI", "Data Cleaning", "EDA", "Statistical Analysis"]
     },
     {
+      category: "MERN Stack",
+      items: [
+        "React.js",
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "REST API",
+        "JWT Authentication",
+        "MERN Stack",
+        "Git",
+        "GitHub",
+        "Postman",
+        "npm"
+      ]
+    },
+    {
+      category: "Data Analytics",
+      items: [
+        "Python",
+        "SQL",
+        "Microsoft Excel",
+        "Power BI",
+        "Pandas",
+        "NumPy",
+        "Data Cleaning",
+        "Data Preprocessing",
+        "Exploratory Data Analysis",
+        "Data Visualization",
+        "DAX",
+        "Statistical Analysis",
+        "Dashboard Development"
+      ]
+    },
+    {
       category: "Tools",
-      items: ["Power BI", "MS Excel", "Jupyter Notebook", "Vs Code"]
+      items: ["Power BI", "MS Excel", "Jupyter Notebook", "VS Code"]
     }
   ],
 

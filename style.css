@@ -290,11 +290,13 @@ body.no-scroll { overflow: hidden; }
   font-family: var(--mono); font-size: 0.72rem;
   color: var(--green); background: var(--green-subtle);
   cursor: default; transition: all 0.25s ease;
+  user-select: none;
 }
 .skill-tag:hover {
   background: rgba(0,255,65,0.15);
   box-shadow: 0 0 15px rgba(0,255,65,0.3);
-  transform: translateY(-2px); border-color: var(--green);
+  transform: translateY(-2px) scale(1.04);
+  border-color: var(--green);
 }
 
 /* Achievements */
