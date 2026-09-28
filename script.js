@@ -275,24 +275,100 @@
     projects.forEach(function (proj) {
       const card = document.createElement('div');
       card.className = 'project-card';
-      let html = '<h3 class="project-name">' + esc(proj.title) + '</h3>';
-      html += '<p class="project-desc">' + esc(proj.description) + '</p>';
-      html += '<div class="project-tech">';
-      proj.technologies.forEach(function (t) {
-        html += '<span class="tech-tag">' + esc(t) + '</span>';
-      });
-      html += '</div><div class="project-links">';
-      if (proj.github) {
-        html += '<a href="' + esc(proj.github) + '" target="_blank" rel="noopener" class="github-link">';
-        html += '<svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>';
-        html += 'GitHub</a>';
+      // Store filter data as a data attribute
+      if (proj.filters) {
+        card.setAttribute('data-filters', proj.filters.join(','));
       }
-      if (proj.demo) {
-        html += '<a href="' + esc(proj.demo) + '" target="_blank" rel="noopener" class="github-link">Live Demo</a>';
+
+      var html = '';
+
+      // Project type badge
+      if (proj.projectType) {
+        html += '<span class="project-type-badge">' + esc(proj.projectType) + '</span>';
+      }
+
+      // Title
+      html += '<h3 class="project-name">' + esc(proj.title) + '</h3>';
+
+      // Category
+      if (proj.category) {
+        html += '<p class="project-category">' + esc(proj.category) + '</p>';
+      }
+
+      // Description
+      html += '<p class="project-desc">' + esc(proj.description) + '</p>';
+
+      // Technologies
+      if (proj.technologies && proj.technologies.length > 0) {
+        html += '<div class="project-tech-section">';
+        html += '<span class="tech-section-label">Tech Stack</span>';
+        html += '<div class="project-tech">';
+        proj.technologies.forEach(function (t) {
+          html += '<span class="tech-tag">' + esc(t) + '</span>';
+        });
+        html += '</div></div>';
+      }
+
+      // Features
+      if (proj.features && proj.features.length > 0) {
+        html += '<div class="project-features">';
+        html += '<span class="features-label">Key Features</span>';
+        html += '<ul class="features-list">';
+        proj.features.forEach(function (f) {
+          html += '<li>' + esc(f) + '</li>';
+        });
+        html += '</ul></div>';
+      }
+
+      // Buttons
+      html += '<div class="project-links">';
+      if (proj.github && proj.github !== '#') {
+        html += '<a href="' + esc(proj.github) + '" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-github">';
+        html += '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>';
+        html += ' GitHub</a>';
+      }
+      if (proj.demo && proj.demo !== '#') {
+        html += '<a href="' + esc(proj.demo) + '" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo">';
+        html += '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+        html += ' Live Demo</a>';
       }
       html += '</div>';
+
       card.innerHTML = html;
       grid.appendChild(card);
+    });
+
+    // Initialize project filtering
+    initProjectFilters();
+  }
+
+  // ── PROJECT FILTERING ──────────────────────────────────────
+  function initProjectFilters() {
+    const filterContainer = document.getElementById('projects-filter');
+    if (!filterContainer) return;
+
+    const filterBtns = filterContainer.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        // Update active state
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+
+        var filter = btn.getAttribute('data-filter');
+
+        projectCards.forEach(function (card) {
+          var cardFilters = card.getAttribute('data-filters') || '';
+          if (filter === 'all' || cardFilters.indexOf(filter) !== -1) {
+            card.classList.remove('hidden');
+            card.style.display = '';
+          } else {
+            card.classList.add('hidden');
+            card.style.display = 'none';
+          }
+        });
+      });
     });
   }
 
